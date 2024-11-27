@@ -30,12 +30,14 @@
 
                 <div class="form-group">
                     <label for="check_in">Tanggal Check-In</label>
-                    <input type="date" name="check_in" id="check_in" class="form-control" required>
+                    <input type="text" name="check_in" id="check_in" class="form-control" 
+                           value="{{ request('check_in') }}" readonly>
                 </div>
 
                 <div class="form-group">
                     <label for="check_out">Tanggal Check-Out</label>
-                    <input type="date" name="check_out" id="check_out" class="form-control" required>
+                    <input type="text" name="check_out" id="check_out" class="form-control" 
+                           value="{{ request('check_out') }}" readonly>
                 </div>
 
                 <div class="form-group">
@@ -48,31 +50,41 @@
                     <input type="file" name="bukti_bayar" id="bukti_bayar" class="form-control" required>
                 </div>
 
-                <button type="submit" class="btn roberto-btn">Submit</button>
+                <button type="submit" class="btn roberto-btn btn-primary">Submit</button>
             </form>
         </div>
     </div>
+    <br>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const checkInInput = document.getElementById('check_in');
             const checkOutInput = document.getElementById('check_out');
             const totalPriceInput = document.getElementById('total_price');
             const hargaKamar = @json($kamar->harga);
 
+            // Fungsi format harga
+            function formatCurrency(amount) {
+                return 'Rp. ' + amount.toLocaleString('id-ID');
+            }
+
+            // Fungsi hitung total harga
             function calculateTotalPrice() {
                 const checkInDate = new Date(checkInInput.value);
                 const checkOutDate = new Date(checkOutInput.value);
-                if (checkInDate && checkOutDate) {
+
+                if (checkInDate && checkOutDate && checkOutDate > checkInDate) {
                     const timeDifference = checkOutDate - checkInDate;
-                    const days = timeDifference / (1000 * 3600 * 24);
-                    const totalPrice = days * hargaKamar;
-                    totalPriceInput.value = 'Rp. ' + totalPrice.toFixed(0).replace(/\d(?=(\d{3})+$)/g, '$&,');
+                    const days = timeDifference / (1000 * 3600 * 24); // Konversi ke hari
+                    const totalPrice = days * hargaKamar; // Hitung total harga
+                    totalPriceInput.value = formatCurrency(totalPrice);
+                } else {
+                    totalPriceInput.value = '';
                 }
             }
 
-            checkInInput.addEventListener('change', calculateTotalPrice);
-            checkOutInput.addEventListener('change', calculateTotalPrice);
+            // Hitung otomatis ketika halaman dimuat
+            calculateTotalPrice();
         });
     </script>
 @endsection

@@ -9,7 +9,7 @@ class CreateBookingsTable extends Migration
     public function up()
     {
         Schema::create('bookings', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedBigInteger('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('kamar_id');
             $table->date('check_in');

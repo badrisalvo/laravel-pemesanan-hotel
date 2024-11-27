@@ -24,14 +24,14 @@
 
                             <!-- Single Blog Area -->
                             <div class="latest-blog-area">
-                                <a href="#" class="post-title">Freelance Design Tricks How</a>
+                                <a href="#" class="post-title">Tour & Travel</a>
                                 <span class="post-date"><i class="fa fa-clock-o" aria-hidden="true"></i> Jan 02, 2019</span>
                             </div>
 
                             <!-- Single Blog Area -->
                             <div class="latest-blog-area">
-                                <a href="#" class="post-title">Free Advertising For Your Online</a>
-                                <span class="post-date"><i class="fa fa-clock-o" aria-hidden="true"></i> Jan 02, 2019</span>
+                                <a href="#" class="post-title">Tour Guide</a>
+                                <span class="post-date"><i class="fa fa-clock-o" aria-hidden="true"></i> Jan 02, 2020</span>
                             </div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                             <!-- Footer Nav -->
                             <ul class="footer-nav">
                                 <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> About Us</a></li>
-                                <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Our Room</a></li>
+                                <li><a href="/room"><i class="fa fa-caret-right" aria-hidden="true"></i> Our Room</a></li>
                                 <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Career</a></li>
                                 <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> FAQs</a></li>
                             </ul>
@@ -60,8 +60,8 @@
                             <span>Subscribe our newsletter gor get notification about new updates.</span>
 
                             <!-- Newsletter Form -->
-                            <form action="index.html" class="nl-form">
-                                <input type="email" class="form-control" placeholder="Enter your email...">
+                            <form action="#" class="nl-form">
+                                <input type="email" class="form-control" placeholder="">
                                 <button type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
                             </form>
                         </div>
@@ -77,20 +77,40 @@
                     <div class="col-12 col-md-8">
                         <!-- Copywrite Text -->
                         <div class="copywrite-text">
-                            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true">
-</i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                            <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script></p>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
-                        <!-- Social Info -->
-                        <div class="social-info">
-                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                        </div>
+                    <div class="social-info">
+                        @if($abouts && $abouts->isNotEmpty())
+                            @if ($instagram = $abouts->where('title', 'Instagram')->first())
+                                <a href="{{ $instagram->description }}" target="_blank">
+                                    <i class="fa fa-instagram" aria-hidden="true"></i> Instagram
+                                </a>
+                            @endif
+
+                            <!-- Facebook -->
+                            @if ($facebook = $abouts->where('title', 'Facebook')->first())
+                                <a href="{{ $facebook->description }}" target="_blank">
+                                    <i class="fa fa-facebook" aria-hidden="true"></i> Facebook
+                                </a>
+                            @endif
+
+                            <!-- Twitter -->
+                            @if ($twitter = $abouts->where('title', 'Twitter')->first())
+                                <a href="{{ $twitter->description }}" target="_blank">
+                                    <i class="fa fa-twitter" aria-hidden="true"></i> Twitter
+                                </a>
+                            @endif
+
+                            @if ($youtube = $abouts->where('title', 'YouTube')->first())
+                                <a href="{{ $youtube->description }}" target="_blank">
+                                    <i class="fa fa-youtube" aria-hidden="true"></i> YouTube
+                                </a>
+                            @endif
+                        @else
+                            <p>No social media links available.</p>
+                        @endif
                     </div>
                 </div>
             </div>

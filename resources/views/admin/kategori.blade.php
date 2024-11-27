@@ -16,6 +16,7 @@
 
         <div class="card mt-4">
             <div class="card-body">
+            <div class="table-responsive">
                 <table class="table table-head-bg-primary">
                     <thead>
                         <tr>
@@ -41,6 +42,7 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
 				<button class="btn btn-primary" data-toggle="modal" data-target="#addKategoriModal">Tambah Kategori</button>
             </div>
         </div>

@@ -1,12 +1,20 @@
 @extends('frontend.master')
 
 @section('content')
+<style>
+.room-details-thumbnail img {
+    border-radius: 15px; /* Menambahkan sudut melengkung pada gambar */
+    width: 100%; /* Memastikan gambar mengambil lebar penuh kontainer */
+    height: auto; /* Menjaga proporsi gambar */
+}
+
+</style>
     <div class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url({{ asset('images/' . $kamar->image) }});">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcrumb-content text-center">
-                        <h2 class="page-title">Room No. {{ $kamar->room_number }}</h2>
+                        <h2 class="page-title">Room No. {{ $kamar->room_number }} - {{ $kamar->kategori->name }}</h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-center">
                                 <li class="breadcrumb-item"><a href="{{ route('home') }}">Beranda</a></li>
@@ -32,14 +40,18 @@
                 </div>
                 <div class="col-12 col-lg-6">
                     <div class="room-details-content">
-                        <h2>Room No.{{ $kamar->room_number }}</h2>
+                        <h2>Room No. {{ $kamar->room_number }} - {{ $kamar->kategori->name }}</h2>
                         <h4>Rp. {{ number_format($kamar->harga, 0, ',', '.') }} <span>/ Hari</span></h4>
-                        <p>{{ $kamar->detail }}</p>
+                        
+                        <h6>Kapasitas: <span>{{ $kamar->kapasitas }} orang</span></h6>
                         <div class="room-feature">
-                            <h6>Kapasitas: <span>Maksimal {{ $kamar->kapasitas }} orang</span></h6>
+                            <p>Detail : {{ $kamar->detail }}</p>
                         </div>
-                        <a href="{{ route('booking.createPayment', ['kamar_id' => $kamar->id]) }}" class="btn roberto-btn">Pesan Sekarang</a>
-
+                        @auth
+                            <a href="{{ route('checkAvailability') }}" class="btn roberto-btn btn-primary">Cek Ketersediaan Kamar</a>
+                        @else
+                            <p> Silahkan Login Untuk Memesan</p>
+                        @endauth
                     </div>
                 </div>
             </div>
@@ -47,4 +59,32 @@
     </div>
     <br>
     <br>
+@endsection
+
+@section('scripts')
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var loginModal = document.getElementById('loginModal');
+            var loginBtn = document.getElementById('loginBtn');
+            var loginClose = document.getElementById('loginClose');
+
+            // Open login modal if login button is clicked
+            loginBtn.onclick = function() {
+                loginModal.style.display = "block";
+            }
+
+            // Close login modal
+            loginClose.onclick = function() {
+                loginModal.style.display = "none";
+            }
+
+            // Close modal if clicked outside
+            window.onclick = function(event) {
+                if (event.target == loginModal) {
+                    loginModal.style.display = "none";
+                }
+            }
+        });
+    </script>
 @endsection

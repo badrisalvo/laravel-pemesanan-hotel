@@ -1,8 +1,11 @@
 
     <div class="main-header">
         <div class="logo-header" data-background-color="light-blue2">
-            <a href="index.html" class="logo">
-            <img src="./img/core-img/persamaan2.png" alt="navbar brand" class="navbar-brand" style="height: 150px; position: relative; top: -45px;">
+            <a href="/" class="logo">
+    <img src="/img/core-img/persamaan.png" alt="navbar brand" class="navbar-brand" 
+         style="height: 60px; position: relative; top: -3px; left: 600%;">
+
+
             </a>
             <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon">
@@ -55,7 +58,7 @@
         <div class="sidebar-content">
             <ul class="nav nav-info">
                 <li class="nav-item active">
-                    <a href="{{ route('admin.index') }}">
+                    <a href="/admin/about">
                         <i class="fas fa-home"></i>
                         <p>Dashboard</p>
                     </a>
@@ -79,7 +82,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('pengunjung.index') }}">
+                    <a href="{{ route('admin.pengunjung') }}">
                         <i class="fas fa-pen-square"></i>
                         <p>Data Pengunjung</p>
                     </a>
@@ -91,7 +94,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="docs/tables.html">
+                    <a href="{{ route('laporan.index')}}">
                         <i class="fas fa-table"></i>
                         <p>Laporan</p>
                     </a>

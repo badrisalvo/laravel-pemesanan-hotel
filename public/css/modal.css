@@ -1,0 +1,75 @@
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.3); /* Black background with opacity */
+}
+
+.modal-content {
+    background-color: rgba(0, 0, 0, 0.8) !important; /* Black background with transparency */
+    margin: 10% auto; /* 10% from the top and centered */
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Optional: Light border for contrast */
+    width: 90%; /* Reduced width */
+    max-width: 400px; /* Max width */
+    border-radius: 10px; /* Optional: Rounded corners */
+    color: white; /* Text color to make it readable */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add shadow for better visibility */
+}
+
+.close {
+    color: #fff; /* Close button color */
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #ccc; /* Hover effect for close button */
+    text-decoration: none;
+}
+
+.modal-form .form-group {
+    margin-bottom: 15px; /* Add spacing between fields */
+}
+
+.modal-form .form-control {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc; /* Optional: Input border */
+    border-radius: 5px; /* Rounded corners for inputs */
+}
+
+.modal-form .btn {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box; 
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.modal-form .btn:hover {
+    background-color: #17a085; /* Darker button on hover */
+}
+
+#openRegisterModal {
+    margin-top: 10px; /* Add space between buttons */
+}
+
+#openLoginModal {
+    margin-top: 10px; /* Add space between buttons */
+}
+
+.btn-secondary {
+    border: none;
+}

@@ -20,6 +20,8 @@
 
         <div class="card mt-4">
             <div class="card-body">
+            <button class="btn btn-info" data-toggle="modal" data-target="#addKamarModal">Tambah Kamar</button>
+            <div class="table-responsive">
                 <table class="table table-head-bg-primary">
                     <thead>
                         <tr>
@@ -63,7 +65,13 @@
                         @endforeach
                     </tbody>
                 </table>
-                <button class="btn btn-primary" data-toggle="modal" data-target="#addKamarModal">Tambah Kamar</button>
+                </div>
+                <div class="d-flex justify-content-center">
+                <p>Halaman {{ $kamar->currentPage() }} dari {{ $kamar->lastPage() }}</p>
+                </div>
+                <div class="d-flex justify-content-center">
+                    {{ $kamar->links('pagination::simple-bootstrap-4') }}              
+                </div>
             </div>
         </div>
 
@@ -194,7 +202,7 @@
         document.getElementById('edit_status').value = status;
         document.getElementById('edit_kategori_id').value = kategori_id;
         document.getElementById('edit_detail').value = detail;
-        document.getElementById('editKamarForm').action = '/kamar/' + id;
+        document.getElementById('editKamarForm').action = '{{ route('kamar.update', '') }}/' + id;
         $('#editKamarModal').modal('show');
     }
 </script>

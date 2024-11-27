@@ -21,13 +21,32 @@
     animation-fill-mode: forwards;
     opacity: 0; /* Initial state */
 }
+.date-input {
+        position: relative;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+    .date-input:focus {
+        border-color: #28a745; /* Green border */
+        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25); /* Green shadow */
+        outline: 0;
+    }
+
     </style>
        <!-- Welcome Area Start -->
       
     <section class="welcome-area">
         <div class="welcome-slides owl-carousel">
             <!-- Single Welcome Slide -->
-            @foreach($recentRooms as $room)
+            @foreach($recentRoomsViews as $room)
             <div class="single-welcome-slide bg-img bg-overlay" style="background-image: url({{ asset('images/' . $room->image) }});" data-img-url="{{ asset('images/' . $room->image) }}">
                 <!-- Welcome Content -->
                 <div class="welcome-content h-100">
@@ -38,73 +57,86 @@
                                 <div class="welcome-text text-center">
                                     <h6 data-animation="fadeInLeft" data-delay="200ms">Hotel &amp; Resort</h6>
                                     <h2 data-animation="fadeInLeft" data-delay="200ms">Welcome To Persamaan</h2>
-                                    <a href="{{ route('room.detail', $room->id) }}" class="btn roberto-btn btn-2" data-animation="fadeInLeft" data-delay="200ms">Discover Now</a>
+                                    <a href="{{ route('room.detail', $room->id) }}" class="btn roberto-btn btn-primary" data-animation="fadeInLeft" data-delay="200ms">Booking Sekarang</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>@endforeach
-        </div>
+            </div>
+            @endforeach
     </div>
+</section>
             
     <!-- Welcome Area End -->
 
-    <section class="hotel-search-form-area section-padding-100-0">
-    <div class="container-fluid">
-        <div class="hotel-search-form">
-            <form action="{{ route('checkAvailability') }}" method="post">
-                @csrf
-                <div class="row justify-content-between align-items-end">
-                    <div class="col-6 col-md-2 col-lg-3">
-                        <label for="checkin_date">Check In</label>
-                        <input type="date" class="form-control" id="checkin_date" name="checkin_date" required>
+    <section class="roberto-about-area section-padding-100-0">  
+    <div class="hotel-search-form-area">
+        <div class="container-fluid">
+            <div class="hotel-search-form">
+                <form action="{{ route('checkAvailability') }}" method="GET">
+                    <div class="row justify-content-between align-items-end">
+                        <div class="col-6 col-md-2 col-lg-3">
+                            <label for="checkin_date">Check In</label>
+                            <input type="date" class="form-control date-input" id="checkin_date" name="checkin_date" required>
+                        </div>
+                        <div class="col-6 col-md-2 col-lg-3">
+                            <label for="checkout_date">Check Out</label>
+                            <input type="date" class="form-control date-input" id="checkout_date" name="checkout_date" required>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <button type="submit" class="form-control btn btn-primary w-100">Periksa Ketersediaan</button>
+                        </div>
                     </div>
-                    <div class="col-6 col-md-2 col-lg-3">
-                        <label for="checkout_date">Check Out</label>
-                        <input type="date" class="form-control" id="checkout_date" name="checkout_date" required>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <button type="submit" class="form-control btn roberto-btn w-100">Periksa Ketersediaan</button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-</section>
 
 
-<section class="about-us-area section-padding-100-0">
     <div class="container mt-100">
-        <div class="row align-items-center">
-            <div class="col-12 col-lg-6 mb-100">
-                <!-- Section Heading -->
-                <div class="section-heading wow fadeInUp" data-wow-delay="50ms">
-                    <h6>About Us</h6>
-                    <h2>Welcome to <br>Persamaan Hotel</h2>
-                </div>
-                <div class="about-us-content">
-                    <h5 class="wow fadeInUp" data-wow-delay="150ms">With over 340 hotels worldwide, NH Hotel Group offers a wide variety of hotels catering for a perfect stay no matter where your destination.</h5>
-                    <p class="wow fadeInUp" data-wow-delay="200ms">Manager: <span>Michen Taylor</span></p>
-                    <img src="img/core-img/signature.png" alt="" class="wow fadeInUp" data-wow-delay="250ms">
-                </div>
+    <div class="row align-items-center">
+        <div class="col-12 col-lg-6 mb-100">
+            <div class="section-heading wow fadeInUp" data-wow-delay="50ms">
+                <h6>About Us</h6>
+            @if($abouts && $abouts->isNotEmpty())
+                @if ($Home1 = $abouts->where('title', 'Home1')->first())
+                <h2>{{ $Home1->description }}</h2>
+                @endif
             </div>
-
-            <div class="col-12 col-lg-6 mb-100">
-                <div class="about-us-thumbnail wow fadeInUp" data-wow-delay="300ms">
-                    <div class="row no-gutters">
+            <div class="about-us-content">
+                @if ($Home2 = $abouts->where('title', 'Home2')->first())
+                <h5 class="wow fadeInUp" data-wow-delay="150ms">
+                {{ $Home2->description }}</h5>
+                @endif
+                <img src="img/core-img/signature.png" alt="Signature" class="wow fadeInUp" data-wow-delay="250ms">
+            </div>
+            @else
+                <p>No Data available.</p>
+            @endif
+        </div>
+        <div class="col-12 col-lg-6 mb-100">
+            <div class="about-us-thumbnail wow fadeInUp" data-wow-delay="300ms">
+                <div class="row no-gutters">
+                    @if($recentRooms && count($recentRooms) > 0)
                         @foreach($recentRooms as $room)
-                            <div class="col-6">
-                                <div class="single-thumb mb-2">
-                                    <img src="{{ asset('images/' . $room->image) }}" alt="{{ $room->room_number }}">
-                                </div>
+                        <div class="col-6">
+                            <div class="single-thumb mb-2">
+                                <img src="{{ asset('images/' . $room->image) }}" alt="{{ $room->room_number }}">
                             </div>
+                        </div>
                         @endforeach
-                    </div>
+                    @else
+                        <div class="col-12">
+                            <p>No recent rooms available</p>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
+</div>
+
 </section>
     <!-- About Us Area End -->
 
@@ -161,13 +193,14 @@
                 <div class="room-content">
 
                 <h2 style="color: white; transform: translateY(-80px);">Persamaan Hotel & Resort</h2>
-                    <h2 data-animation="fadeInUp" data-delay="100ms">Room No.{{ $room->room_number }}</h2>
-                    <h3 data-animation="fadeInUp" data-delay="100ms">Rp. {{ $room->harga }} <span>/ Hari</span></h3>
+                    <h2 data-animation="fadeInUp" data-delay="100ms">Room No.{{ $room->room_number }} - {{ $room->kategori->name }}</h2>
+                    <h3 data-animation="fadeInUp" data-delay="100ms">Rp. {{ number_format($room->harga, 0, ',', '.') }} <span>/ Hari</span></h3>
                     <ul class="room-feature" data-animation="fadeInUp" data-delay="100ms">
                         <li><span><i class="fa fa-check"></i> Kapasitas</span> <span>: Maksimal {{ $room->kapasitas }} orang</span></li>
                         <li><span><i class="fa fa-check"></i> Details</span> <span>: {{ $room->detail }}</span></li>
+                        <li><span><i class="fa fa-check"></i> Kategori</span> <span>: {{ $room->kategori->name }}</span></li>
                     </ul>
-                    <a href="{{ route('room.detail', $room->id) }}" class="btn roberto-btn mt-30" data-animation="fadeInUp" data-delay="150ms">Lihat Detail</a>
+                    <a href="{{ route('room.detail', $room->id) }}" class="btn btn-success" data-animation="fadeInUp" data-delay="150ms">Lihat Detail</a>
                 </div>
             </div>
             @endforeach
@@ -178,6 +211,22 @@
 <br>
 
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const checkInInput = document.getElementById('checkin_date');
+        const checkOutInput = document.getElementById('checkout_date');
 
+        // Set the minimum check-in date to today
+        const today = new Date().toISOString().split('T')[0];
+        checkInInput.setAttribute('min', today);
+
+        checkInInput.addEventListener('change', function() {
+            const checkInDate = new Date(this.value);
+            checkInDate.setDate(checkInDate.getDate() + 1);
+            const minCheckOutDate = checkInDate.toISOString().split('T')[0];
+            checkOutInput.setAttribute('min', minCheckOutDate);
+        });
+    });
+</script>
 </html>
 @endsection

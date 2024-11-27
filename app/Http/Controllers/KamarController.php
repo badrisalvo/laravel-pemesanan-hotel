@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use PDF;
 use App\Models\Kamar;
+use App\Models\About;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -11,7 +12,7 @@ class KamarController extends Controller
 {
     public function index()
     {
-        $kamar = Kamar::with('kategori')->get();
+        $kamar = Kamar::with('kategori')->orderBy('room_number', 'asc')->paginate(10);
         $kategori = Kategori::all();
         return view('admin.kamar', compact('kamar', 'kategori'));
     }
@@ -19,20 +20,19 @@ class KamarController extends Controller
 
     public function userIndex()
     {
-        $kamar = Kamar::with('kategori')->paginate(10); 
+        $kamar = Kamar::with('kategori')->where('status', 1)->paginate(10); 
         $kategori = Kategori::all();
-    
         return view('user.room', compact('kamar', 'kategori'));
     }
 
     public function userHome()
     {
-        $recentRooms = Kamar::orderBy('created_at', 'desc')->take(5)->get();
-        $kamar = Kamar::with('kategori')->get(); 
-    
-        return view('home', compact('kamar', 'recentRooms'));
+        $recentRooms = Kamar::orderBy('created_at', 'desc')->take(6)->get();
+        $recentRoomsViews = Kamar::orderBy('created_at', 'desc')->where('status', 1)->take(6)->get();
+        $kamar = Kamar::with('kategori')->where('status', 1)->get(); 
+        $about = About::first();
+        return view('home', compact('kamar', 'recentRooms','recentRoomsViews', 'about'));
     }
-
     
     public function show($id)
     {

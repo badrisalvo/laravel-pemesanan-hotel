@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Providers;
-
+use App\Models\About;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -17,8 +18,12 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
+    public function boot()
     {
-        //
+        // Mengambil semua data About
+        $abouts = About::all();
+
+        // Membagikan data About ke seluruh view
+        View::share('abouts', $abouts);
     }
 }

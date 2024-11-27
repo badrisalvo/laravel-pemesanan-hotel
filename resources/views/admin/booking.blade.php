@@ -17,10 +17,13 @@
 
         <div class="card mt-4">
             <div class="card-body">
+            <button class="btn btn-info" data-toggle="modal" data-target="#addBookingModal">Tambah Booking</button>
+            <div class="table-responsive">
                 <table class="table table-head-bg-primary">
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>ID Booking</th>
                             <th>User</th>
                             <th>Kamar</th>
                             <th>Harga Kamar</th>
@@ -28,6 +31,7 @@
                             <th>Check-Out</th>
                             <th>Total Harga</th>
                             <th>Status</th>
+                            <th>Tanggal Booking</th>
                             <th>Bukti Bayar</th>
                             <th>Aksi</th>
                         </tr>
@@ -36,16 +40,18 @@
                         @foreach($bookings as $key => $booking)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
+                                <td>{{ $booking->id }}</td>
                                 <td>{{ $booking->user->name }}</td>
                                 <td>{{ $booking->kamar->room_number }}</td>
                                 <td>Rp. {{ number_format($booking->kamar->harga, 0, ',', '.') }}</td>
-                                <td>{{ $booking->check_in }}</td>
-                                <td>{{ $booking->check_out }}</td>
+                                <td>{{ \Carbon\Carbon::parse($booking->check_in)->format('d-m-Y') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($booking->check_out)->format('d-m-Y') }}</td>
                                 <td>Rp. {{ number_format($booking->harga, 0, ',', '.') }}</td>
                                 <td>{{ ucfirst($booking->status) }}</td>
+                                <td>{{ \Carbon\Carbon::parse($booking->updated_at)->format('d-m-Y') }}</td>
                                 <td>
                                     @if($booking->bukti_bayar)
-                                        <button class="btn btn-info" onclick="showProof('{{ asset('storage/' . $booking->bukti_bayar) }}')">Lihat Bukti Bayar</button>
+                                        <button class="btn btn-info" onclick="showProof('{{ asset('storage/' . $booking->bukti_bayar) }}')">Lihat</button>
                                     @else
                                         -
                                     @endif
@@ -59,7 +65,6 @@
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger">Hapus</button>
                                         </form>
-                                        <button class="btn btn-info" onclick="showEditForm({{ $booking->id }}, '{{ $booking->user_id }}', '{{ $booking->kamar_id }}', '{{ $booking->check_in }}', '{{ $booking->check_out }}')">Edit</button>
                                         <form action="{{ route('booking.confirm', $booking->id) }}" method="POST" style="display: inline-block;">
                                             @csrf
                                             @method('PUT')
@@ -71,7 +76,17 @@
                         @endforeach
                     </tbody>
                 </table>
-                <button class="btn btn-primary" data-toggle="modal" data-target="#addBookingModal">Tambah Booking</button>
+                </div>  
+                <div class="d-flex justify-content-center">
+                <p>Halaman {{ $bookings->currentPage() }} dari {{ $bookings->lastPage() }}</p>
+                </div>
+                <div class="d-flex justify-content-center">
+                    {{ $bookings->links('pagination::simple-bootstrap-4') }}
+                    
+                    
+                </div>
+
+                
             </div>
         </div>
 
@@ -195,7 +210,6 @@
         </div>
     </div>
 </div>
-
 <script>
     function showEditForm(id, user_id, kamar_id, check_in, check_out) {
         document.getElementById('edit_user_id').value = user_id;

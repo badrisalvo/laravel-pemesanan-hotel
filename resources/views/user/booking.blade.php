@@ -7,8 +7,8 @@
 <div class="container-fluid">
     <div class="card card-documentation">
         <div class="card-header bg-info-gradient text-white bubble-shadow">
-            <h4>Daftar Booking Saya</h4>
-            <p class="mb-0 op-7">Booking yang telah Anda buat</p>
+            <h4>Daftar Reservasi</h4>
+            <p class="mb-0 op-7">History</p>
         </div>
 
         @if(session('success'))
@@ -19,6 +19,7 @@
 
         <div class="card mt-4">
             <div class="card-body">
+            <div class="table-responsive">
                 <table class="table table-head-bg-primary">
                     <thead>
                         <tr>
@@ -30,6 +31,7 @@
                             <th>Total Harga</th>
                             <th>Status</th>
                             <th>Bukti Bayar</th>
+                            <th>Reservasi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,6 +51,9 @@
                                         -
                                     @endif
                                 </td>
+                                <td><a href="{{ route('booking.download', $booking->id) }}" class="btn btn-success btn-sm">
+                                    <i class="fa fa-download"></i> Download PDF</a>
+                                </td>
                             </tr>
                         @empty
                             <tr>
@@ -57,6 +62,7 @@
                         @endforelse
                     </tbody>
                 </table>
+                </div>
             </div>
         </div>
 
