@@ -20,10 +20,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Mengambil semua data About
-        $abouts = About::all();
-
-        // Membagikan data About ke seluruh view
-        View::share('abouts', $abouts);
+        if (Schema::hasTable('abouts')) {
+            // Mengambil semua data About hanya jika tabel ada
+            $abouts = About::all();
+    
+            // Membagikan data About ke seluruh view
+            View::share('abouts', $abouts);
+        }
     }
 }
