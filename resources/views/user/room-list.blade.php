@@ -42,11 +42,10 @@
         </div>
     </div>
 
-    <!-- Rooms Area Start -->
+
     <div class="roberto-rooms-area section-padding-100-0">
         <div class="container">
             @if($checkInDate && $checkOutDate)
-                <!-- Display Selected Dates -->
                 <div class="mb-4">
                     @php
                         $formattedCheckInDate = \Carbon\Carbon::parse($checkInDate)->format('d F Y');
@@ -56,14 +55,11 @@
                 </div>
 
                 <div class="row">
-                    <!-- Single Room Area -->
                     @forelse($kamar as $room)
                     <div class="single-room-area d-flex align-items-center mb-50 wow fadeInUp" data-wow-delay="100ms">
-                            <!-- Room Thumbnail -->
                             <div class="room-thumbnail">
                                 <img src="{{ asset('images/' . $room->image) }}" alt="{{ $room->room_number }}" style=" height: 200px; width: 450px;">
                             </div>
-                            <!-- Room Content -->
                             <div class="room-content">
                                 <h3>Kamar No. {{ $room->room_number }} - {{ $room->kategori->name }} </h3>
                                 <h4>Rp. {{ number_format($room->harga, 0, ',', '.') }} <span>/ Hari</span></h4>
@@ -83,8 +79,6 @@
                         <p>Tidak ada kamar tersedia pada tanggal yang dipilih.</p>
                     @endforelse
                 </div>
-
-                <!-- Pagination -->
                 <nav class="roberto-pagination wow fadeInUp mb-100" data-wow-delay="1000ms">
                     {{ $kamar->links() }}
                 </nav>
@@ -93,7 +87,6 @@
             @endif
         </div>
     </div>
-    <!-- Rooms Area End -->
 </section>
 
 @endsection
@@ -115,7 +108,6 @@
         const checkInInput = document.getElementById('checkin_date');
         const checkOutInput = document.getElementById('checkout_date');
 
-        // Set the minimum check-in date to today
         const today = new Date().toISOString().split('T')[0];
         checkInInput.setAttribute('min', today);
 

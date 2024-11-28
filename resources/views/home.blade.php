@@ -35,24 +35,20 @@
     }
 
     .date-input:focus {
-        border-color: #28a745; /* Green border */
-        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25); /* Green shadow */
+        border-color: #28a745; 
+        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25); 
         outline: 0;
     }
 
     </style>
-       <!-- Welcome Area Start -->
-      
+
     <section class="welcome-area">
         <div class="welcome-slides owl-carousel">
-            <!-- Single Welcome Slide -->
             @foreach($recentRoomsViews as $room)
             <div class="single-welcome-slide bg-img bg-overlay" style="background-image: url({{ asset('images/' . $room->image) }});" data-img-url="{{ asset('images/' . $room->image) }}">
-                <!-- Welcome Content -->
                 <div class="welcome-content h-100">
                     <div class="container h-100">
                         <div class="row h-100 align-items-center">
-                            <!-- Welcome Text -->
                             <div class="col-12">
                                 <div class="welcome-text text-center">
                                     <h6 data-animation="fadeInLeft" data-delay="200ms">Hotel &amp; Resort</h6>
@@ -68,7 +64,6 @@
     </div>
 </section>
             
-    <!-- Welcome Area End -->
 
     <section class="roberto-about-area section-padding-100-0">  
     <div class="hotel-search-form-area">
@@ -138,39 +133,28 @@
 </div>
 
 </section>
-    <!-- About Us Area End -->
 
-    <!-- Service Area Start -->
     <div class="roberto-service-area">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="service-content d-flex align-items-center justify-content-between">
-                        <!-- Single Service Area -->
                         <div class="single-service--area mb-100 wow fadeInUp" data-wow-delay="100ms">
                             <img src="img/core-img/icon-1.png" alt="">
                             <h5>Transportion</h5>
                         </div>
-
-                        <!-- Single Service Area -->
                         <div class="single-service--area mb-100 wow fadeInUp" data-wow-delay="300ms">
                             <img src="img/core-img/icon-2.png" alt="">
                             <h5>Reiseservice</h5>
                         </div>
-
-                        <!-- Single Service Area -->
                         <div class="single-service--area mb-100 wow fadeInUp" data-wow-delay="500ms">
                             <img src="img/core-img/icon-3.png" alt="">
                             <h5>Spa Relaxtion</h5>
                         </div>
-
-                        <!-- Single Service Area -->
                         <div class="single-service--area mb-100 wow fadeInUp" data-wow-delay="700ms">
                             <img src="img/core-img/icon-4.png" alt="">
                             <h5>Restaurant</h5>
                         </div>
-
-                        <!-- Single Service Area -->
                         <div class="single-service--area mb-100 wow fadeInUp" data-wow-delay="900ms">
                             <img src="img/core-img/icon-1.png" alt="">
                             <h5>Bar &amp; Drink</h5>
@@ -180,18 +164,13 @@
             </div>
         </div>
     </div>
-    <!-- Service Area End -->
 
-    <!-- Our Room Area Start -->
     <section class="roberto-rooms-area">
         <div class="rooms-slides owl-carousel">
             @foreach($kamar as $room)
             <div class="single-room-slide d-flex align-items-center">
-                <!-- Thumbnail -->
                 <div class="room-thumbnail h-100 bg-img" style="background-image: url('{{ asset('images/' . $room->image) }}');"></div>
-                <!-- Content -->
                 <div class="room-content">
-
                 <h2 style="color: white; transform: translateY(-80px);">Persamaan Hotel & Resort</h2>
                     <h2 data-animation="fadeInUp" data-delay="100ms">Room No.{{ $room->room_number }} - {{ $room->kategori->name }}</h2>
                     <h3 data-animation="fadeInUp" data-delay="100ms">Rp. {{ number_format($room->harga, 0, ',', '.') }} <span>/ Hari</span></h3>
@@ -206,7 +185,6 @@
             @endforeach
         </div>
     </section>
-    <!-- Our Room Area End -->
      <br>
 <br>
 
@@ -216,7 +194,6 @@
         const checkInInput = document.getElementById('checkin_date');
         const checkOutInput = document.getElementById('checkout_date');
 
-        // Set the minimum check-in date to today
         const today = new Date().toISOString().split('T')[0];
         checkInInput.setAttribute('min', today);
 

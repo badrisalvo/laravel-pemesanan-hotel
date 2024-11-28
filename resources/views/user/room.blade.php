@@ -1,6 +1,5 @@
 @extends('frontend.master')
 @section('content')
- <!-- Breadcrumb Area Start -->
  <div class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url(img/bg-img/16.jpg);">
     <div class="container h-100">
         <div class="row h-100 align-items-center">
@@ -18,21 +17,16 @@
         </div>
     </div>
 </div>
-<!-- Breadcrumb Area End -->
 
-<!-- Rooms Area Start -->
 <div class="roberto-rooms-area section-padding-100-0">
     <div class="container">
 
         <div class="row">
             @foreach($kamar as $room)
-                <!-- Single Room Area -->
                 <div class="single-room-area d-flex align-items-center mb-50 wow fadeInUp" data-wow-delay="100ms">
-                    <!-- Room Thumbnail -->
                     <div class="room-thumbnail">
                         <img src="{{ asset('images/' . $room->image) }}" alt="{{ $room->room_number }}" style=" height: 200px; width: 450px;">
                     </div>
-                    <!-- Room Content -->
                     <div class="room-content">
                         <h2>Kamar No. {{ $room->room_number }} - {{ $room->kategori->name }}</h2>
                         <h4>Rp. {{ number_format($room->harga, 0, ',', '.') }} <span>/ Hari</span></h4>
@@ -46,7 +40,6 @@
                 </div>
             @endforeach
 
-            <!-- Pagination -->
             <nav class="roberto-pagination wow fadeInUp mb-100" data-wow-delay="1000ms">
                 {{ $kamar->links() }}
             </nav>
@@ -57,9 +50,9 @@
 <style>
     .room-thumbnail img {
         width: 100%;
-        height: 200px; /* Atur tinggi gambar agar sama */
-        object-fit: cover; /* Menjaga proporsi gambar */
-        border-radius: 10px; /* Membuat pinggiran gambar melengkung */
+        height: 200px; 
+        object-fit: cover; 
+        border-radius: 10px; 
     }
     .hotel-reservation--area {
         margin-bottom: 30px;
@@ -95,13 +88,13 @@
                     const minCheckoutDate = new Date(selectedDates[0]);
                     minCheckoutDate.setDate(minCheckoutDate.getDate() + 1);
                     checkOutInput.set("minDate", minCheckoutDate);
-                    checkOutInput.setDate(minCheckoutDate); // Set default check-out date to 1 day after check-in
+                    checkOutInput.setDate(minCheckoutDate);
                 }
             }
         });
 
         const checkOutInput = flatpickr("#checkOutDate", {
-            minDate: new Date().fp_incr(1), // 1 day after today
+            minDate: new Date().fp_incr(1), 
             dateFormat: "Y-m-d"
         });
     });

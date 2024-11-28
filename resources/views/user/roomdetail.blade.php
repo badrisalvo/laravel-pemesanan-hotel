@@ -27,9 +27,7 @@
             </div>
         </div>
     </div>
-    <!-- Breadcrumb Area End -->
 
-    <!-- Room Details Area Start -->
     <div class="room-details-area section-padding-100-0">
         <div class="container">
             <div class="row">
@@ -69,17 +67,14 @@
             var loginBtn = document.getElementById('loginBtn');
             var loginClose = document.getElementById('loginClose');
 
-            // Open login modal if login button is clicked
             loginBtn.onclick = function() {
                 loginModal.style.display = "block";
             }
 
-            // Close login modal
             loginClose.onclick = function() {
                 loginModal.style.display = "none";
             }
 
-            // Close modal if clicked outside
             window.onclick = function(event) {
                 if (event.target == loginModal) {
                     loginModal.style.display = "none";

@@ -18,9 +18,7 @@
             </div>
         </div>
     </div>
-    <!-- Breadcrumb Area End -->
 
-    <!-- Payment Details Area Start -->
     <div class="payment-details-area section-padding-100-0">
         <div class="container">
             <h2>Detail Pemesanan</h2>
@@ -63,27 +61,24 @@
             const totalPriceInput = document.getElementById('total_price');
             const hargaKamar = @json($kamar->harga);
 
-            // Fungsi format harga
             function formatCurrency(amount) {
                 return 'Rp. ' + amount.toLocaleString('id-ID');
             }
 
-            // Fungsi hitung total harga
             function calculateTotalPrice() {
                 const checkInDate = new Date(checkInInput.value);
                 const checkOutDate = new Date(checkOutInput.value);
 
                 if (checkInDate && checkOutDate && checkOutDate > checkInDate) {
                     const timeDifference = checkOutDate - checkInDate;
-                    const days = timeDifference / (1000 * 3600 * 24); // Konversi ke hari
-                    const totalPrice = days * hargaKamar; // Hitung total harga
+                    const days = timeDifference / (1000 * 3600 * 24); 
+                    const totalPrice = days * hargaKamar; 
                     totalPriceInput.value = formatCurrency(totalPrice);
                 } else {
                     totalPriceInput.value = '';
                 }
             }
 
-            // Hitung otomatis ketika halaman dimuat
             calculateTotalPrice();
         });
     </script>

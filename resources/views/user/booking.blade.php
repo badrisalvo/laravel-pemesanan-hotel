@@ -1,5 +1,3 @@
-<!-- resources/views/user/bookings.blade.php -->
-
 @extends('frontend.master')
 
 @section('content')
@@ -66,7 +64,6 @@
             </div>
         </div>
 
-        <!-- Proof Modal -->
         <div class="modal fade" id="proofModal" tabindex="-1" role="dialog" aria-labelledby="proofModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">

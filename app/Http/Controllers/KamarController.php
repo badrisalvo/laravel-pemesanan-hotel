@@ -90,7 +90,7 @@ class KamarController extends Controller
         $kamar = Kamar::findOrFail($id);
         $data = $request->all();
         if ($request->hasFile('image')) {
-            // Hapus gambar lama jika ada
+
             if ($kamar->image && file_exists(public_path('images/' . $kamar->image))) {
                 unlink(public_path('images/' . $kamar->image));
             }
@@ -109,7 +109,6 @@ class KamarController extends Controller
     {
         $kamar = Kamar::findOrFail($id);
 
-        // Hapus gambar jika ada
         if ($kamar->image && file_exists(public_path('images/' . $kamar->image))) {
             unlink(public_path('images/' . $kamar->image));
         }
